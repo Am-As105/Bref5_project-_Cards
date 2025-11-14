@@ -1,0 +1,148 @@
+body{
+    background-color: 1c398e;
+}
+#ff{
+    font-size: medium;
+    right: 100px;   
+
+}
+#img{
+    width: 100px;
+     height: 100px;
+      margin-left: 20px;
+}
+#imgQUIS{
+    width: 30px;
+}
+#Quiz{
+    color: aquamarine;
+    /* border: solid rgb(255, 255, 255) 1px; */
+   padding: 10px;
+    width: 170px;
+    border-radius: 10px;
+    color: aliceblue;
+}
+.logocards{
+    display: flex;
+     border: 1px solid;
+    border-radius: 10px;
+    background-color: white ;
+    border: white;
+    /* box-shadow: 0px 0px 10px white; */
+}
+.logocards:hover{
+     background-color: rgb(71, 135, 190);
+}
+.logocards img{
+    width: 40px;
+    margin-left: 4px;
+    margin-top: 4px;
+   
+
+}
+.logoQuiz{
+    display: flex;
+    
+    color: aliceblue;
+    padding: 3px;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px;
+}
+.logoQuiz strong img{
+    width: 40px;
+    
+
+}
+.h a{
+    color: aliceblue;
+}
+
+#Quiz img{
+    width: 20px; 
+    margin: auto;
+    
+}
+.Flashcards{
+    /* background-color: white ; */
+    padding: 12px;
+    
+    width: 170px;
+    /* border-radius: 10px; */
+}
+
+.options{
+    display: flex;
+}
+.cont{
+    
+    background-color:#171717;
+    padding: 60px;
+    text-align: center;
+    color: white;
+    gap:30px;
+    border-radius: 30px;
+
+
+
+}
+#Q1{
+    background-color:#595959;
+    padding: 7px;
+    margin-top: 30px;
+    width: px;
+
+
+}
+#checkBtn{
+    color: #ffffff;
+    background-color: rgb(168, 198, 0);
+    padding: 8px;
+    
+    
+    
+}
+
+.addflash button{
+    background-color: #03be00;
+    margin-top: 30px;
+}
+#text{
+    font-size: 2rem;
+    padding-bottom: 20px;
+    font-style: oblique;
+}
+
+.list{
+    
+    /* background-color: #03be00; */
+    display: grid;
+    gap: 10px;
+    
+}
+/* .listCollection{
+    margin-top: 20px;
+    display: flex;
+    padding: 40px;
+
+    background-color: #489398;
+    border-radius: 20px;
+    
+    
+}
+.listCollection button{
+    background-color: #171717;
+    width: 100px;
+} */
+
+
+@media (max-width:700px)
+{
+    .addflash button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    
+}
