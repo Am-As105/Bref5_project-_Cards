@@ -1,4 +1,4 @@
-// const { compile } = require("tailwindcss");
+
 
 const   input = document.getElementById("titleinput");
 const   submit = document.getElementById("btn");
@@ -9,161 +9,166 @@ const  Réponse  = document.getElementById("Reponse");
 const Ajouter_cart  = document.getElementById("Ajouter");
 
 const  index =  document.getElementById("index");
-let id_option;
-let currentCollection;
-let  option_question;
+
+
 
  let  selectorO =  document.getElementById("optionsCards");
 
 
+ const   placeCard  = document.getElementById("placeCard"); 
+
 let cardsArr = [];
-getdata();
+let QuestionArr = [];
+
+let   data_from_LS = JSON.parse(localStorage.getItem("CARDS"));
+let data_Question = JSON.parse(localStorage.getItem("question"));
 
 
 
-// if (localStorage.getItem("cardsArr")){
-//     cardsArr = JSON.parse(localStorage.getItem("cardsArr"));
+
+let i = 0;
+
+if (data_from_LS !== null){
+    cardsArr = data_from_LS;
+    while (i < cardsArr.length){
     
-// }
+    ajout_collection_to_card(cardsArr[i]);
+    ajout_collection_to_Option(cardsArr[i]);
+    i++; 
+}
+    
+}
 
+i = 0;
 
+if (data_Question !== null){
+    while(i < QuestionArr.length){
+        
+        i++;
+    }
+    
+}
 
-
+// console.log(cardsArr.length);
 submit.onclick = function (){
 
     if (input.value !== ""){
-        addCardTOArry(input.value);
+
+        // ajout_collection_to_Option(input.value);
+        add_info_toARR(input.value);
         
-        // optionsCards();
         input.value = "";
         
     }
     
 }
 
-function  addCardTOArry(infoInput){ 
-    const  cards = {
-        id: Date.now(),
-        title:infoInput,
-        
+function add_info_toARR(input_value){
+
+    const   card = {
+        id : Date.now(),
+        title : input_value,
     }
 
-    cardsArr.push(cards);
-    add_element();
+    cardsArr.push(card);
+
+    localStorage.setItem("CARDS", JSON.stringify(cardsArr));
+
+    ajout_collection_to_Option(card);   
+    ajout_collection_to_card(card);
     
 }
+// ajout_collection_to_Option()
+
+function ajout_collection_to_Option(input_value)
+{
+
+
+    let create_option = document.createElement("option");
+
+    let h3 = document.createElement("h3");
+    h3.className = "titleCol";
+    h3.textContent = input_value.title;
+     let  amine =   h3.setAttribute( "data_id",input_value.id);
+    
+    create_option.appendChild(h3)
+    selectorO.appendChild(create_option);
+    
+    
+}
+
+
+function ajout_collection_to_card(input_value){
+
+      let create_card = document.createElement("h2");
+      create_card.className = "h2";
+    //   create_card.className = "card";
+
+      create_card.textContent = input_value.title;
+
+      create_card.setAttribute("data-id",input_value.id);
+
+      
+    let question_place = document.createElement("h4");
+  
+    question_place.style.color = "silver";
+    
+
+    create_card.question_place = question_place;
+    
+
+    create_card.style.backgroundColor = "black";
+    create_card.style.color = "white";
+    create_card.style.padding = "50px";
+   
+
+    create_card.appendChild(question_place);
+
+     placeCard.appendChild(create_card);
+
+
+        create_card.onclick = function (){
+
+        create_card.style.backgroundColor = "blue";
+     }
+          
+}
+
+Ajouter_cart.onclick = function(){
+
+
+    const selectedTitle = selectorO.value;
+    const allCards = document.querySelectorAll("#placeCard h2");
+
+    allCards.forEach(card => {
+        if (card.textContent === selectedTitle) {
+            card.question_place.textContent = Question.value;
+
+            const question_to_local = {
+                id:Date.now(),
+                title:Question.value
+            }
+            QuestionArr.push(question_to_local);
+            localStorage.setItem("question",JSON.stringify(QuestionArr));
+
+        
+
+            console.log( Question.value);
+        }
+    });
+};
+
+
+
+
+
+
 
 
 
 
  
 
-function add_element(){
-
-
-    card.textContent = ""; 
-    selectorO.textContent = "";
-
-
-    cardsArr.forEach(cards =>{
-
-
-        let Add_element =  document.createElement("div"); 
-        
-        Add_element.className = "cards ";
-        Add_element.setAttribute("id", cards.id);
-        let h1 = document.createElement("h1");
-        
-        
-        let link = document.createElement("a");
-        let question_AND_ansewr = document.createElement("div");
-        question_AND_ansewr.className = "question_AND_ansewr";
-        
-        link.appendChild(document.createTextNode(cards.title))
-
-
-        // link.appendChild();
-        Add_element.appendChild(question_AND_ansewr);
-        Add_element.appendChild(link);
-        
-
-
-        card.appendChild(Add_element); 
-        Add_element.style.backgroundColor = "black";
-        Add_element.style.color = "white";
-        Add_element.className = 'p-6';
-
-
-        currentCollection = Add_element;
-
-
-         let  add = document.createElement("option");
-         add.value = cards.id;
-
-         add.style.backgroundColor = "blue";
-
-         add.appendChild(document.createTextNode(cards.title));
-         option_question = add;
-
-
-         
-         
-         selectorO.appendChild(add);
-
-          addinfo_to_local(cardsArr);
-        
-        //   console.log(add);
-
-        // console.log(Add_element);  
-    });
-
-}
-
-function AJOUT() {
-    let selectedId = selectorO.value;
-    if (!selectedId)
-        
-        return;
-
-    let target_card = document.getElementById(selectedId);
-    if (!targetCard) 
-        return;
-    
-
-    let zone = target_card.querySelector(".question_AND_ansewr");
-
-    let ques = document.createElement("h1");
-    ques.textContent = Question.value;
-
-
-    zone.appendChild(ques);
-
-    Question.value = "";
-    Réponse.value = "";
-}
-
-
-
-function  addinfo_to_local(cardsArr){
-
-    localStorage.setItem("cardsArr", JSON.stringify(cardsArr));
-    
-}
-//  window.addEventListener('DOMContentLoaded', getdata);
-function getdata() {
-    
-    let data  =  localStorage.getItem('cardsArr');
-
-    if (data){
-        let CS = window.JSON.parse(data);
-        cardsArr.push(...CS);  
-        add_element(CS);   
-        
-    }
-
-   
-    
-}
 
 
 
