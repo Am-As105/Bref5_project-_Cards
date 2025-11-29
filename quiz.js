@@ -76,11 +76,12 @@ fetch("question.json")
 
 
         if (selected.value === correctAnswer) {
-            resultEl.textContent = "correct";
+            
             card.style.backgroundColor = "green";
             
 
             next_question();
+            resultEl.textContent = "correct";
             
         } else {
             resultEl.textContent = "Wrong";
