@@ -45,6 +45,7 @@ fetch("question.json")
 
     
     function next_question(){
+        
         index++;
         if (index < data.length) 
             {
@@ -53,7 +54,7 @@ fetch("question.json")
         } else {
             questionEl.textContent = "Quiz finished!";
            
-            card.style.backgroundColor = "white";
+            card.style.backgroundColor = "gray";
         }
     }
      
@@ -82,6 +83,7 @@ fetch("question.json")
 
             next_question();
             resultEl.textContent = "correct";
+            
             
         } else {
             resultEl.textContent = "Wrong";
