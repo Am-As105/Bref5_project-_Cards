@@ -20,12 +20,19 @@ const  index =  document.getElementById("index");
 let cardsArr = [];
 // let QuestionArr = [];
 
-let   data_from_LS = JSON.parse(localStorage.getItem("CARDS"));
+let   data_from_LS = JSON.parse(localStorage.getItem("CARDS")) || [];
 // let data_Question = JSON.parse(localStorage.getItem("question"));
 
 
+let cards = [];
+let  dataRES = JSON.parse(localStorage.getItem("the_cards"));
 
 
+if (dataRES !== null) {
+    cards = dataRES
+    
+}
+console.log(cards)
 let i = 0;
 
 if (data_from_LS !== null){
@@ -36,9 +43,12 @@ if (data_from_LS !== null){
     ajout_collection_to_Option(cardsArr[i]);
     i++; 
 }
-    
-}
-console.log(cardsArr);
+
+
+ getIfromlocal();
+
+
+console.log(cards);
 
 
 
@@ -62,10 +72,14 @@ function add_info_toARR(input_value){
     const   card = {
         id : Date.now(),
         title : input_value,
+
+        ques:"",
+        res:""
         
     }
 
     cardsArr.push(card);
+    console.log(card);
 
     localStorage.setItem("CARDS", JSON.stringify(cardsArr));
 
@@ -102,6 +116,7 @@ function ajout_collection_to_card(input_value){
 
     let question_place = document.createElement("h4");
     question_place.style.color = "silver";
+
     create_card.question_place = question_place;
     create_card.appendChild(question_place);
 
@@ -125,41 +140,71 @@ function ajout_collection_to_card(input_value){
 
 
 
-Ajouter_cart.onclick = function(){
-
+Ajouter_cart.onclick = function (){
 
     const selectedTitle = selectorO.value;
     const allCards = document.querySelectorAll("#placeCard .card");
 
     allCards.forEach(card =>{
         
-        
         const title = card.firstChild.nodeValue.trim();
-        if (title === selectedTitle) {
+    
+
+        if (title === selectedTitle){
+
+
+            card.querySelector(".card-back").textContent = Réponse.value;
             card.question_place.textContent = Question.value;
 
-           
-            //
+            const qholder = Question.value.trim();
+            const aholder = Réponse.value.trim();
+            
 
-        
-
-            console.log( Question.value);
+            const   Q_R = {
+                id:title,
+                res:qholder,
+                ques:qholder,
+                
+            }
+            cards.push(Q_R);
+            localStorage.setItem("the_cards", JSON.stringify(cards));
+            
+            // console.log(Question.value);
         }
-    });
-};
+    })
+}}
 
+function getIfromlocal(){
+    i = 0;
+  const allCards = document.querySelectorAll("#placeCard .card");
 
+  
+   
+  while (i  < allCards.length){
+    const title = allCards[i].firstChild.nodeValue.trim();
+    let j = 0;
 
+    while (j < cards.length){
+           
 
-
-
-
-
-
+          if (cards[j].id === title ){
+               allCards[i].querySelector(".card-back").textContent = cards[j].res;
+               allCards[i].question_place.textContent = cards[j].ques;
+               
+               
+                }
+                j++;  
+            }
+            
+            i++;
+  }
+ 
+    
+}
 
  
+ 
 
-
-
-
+    
+    
 
